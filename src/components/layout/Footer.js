@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 import { FaHeart } from "react-icons/fa";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,7 +13,8 @@ function MadeWithLove({ name }) {
     <Typography variant="body1" align="center" color="inherit">
       {"Feito com "} <FaHeart /> {"| Desenvolvido por"}
       <Link color="inherit" href="https://thiagotec.com/">
-        {" "} {name}
+        {" "}
+        {name}
       </Link>
     </Typography>
   );
@@ -49,11 +50,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 MadeWithLove.propTypes = {
-  name: PropTypes.string,
-}
+  name: PropTypes.string
+};
 
 MadeWithLove.defaultProps = {
   name: "Thiago Moura"
-}
+};
 
 export default Footer;

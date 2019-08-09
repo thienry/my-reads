@@ -20,9 +20,16 @@ const Navbar = ({ title }) => {
       <AppBar position="static" color="primary">
         <Container maxWidth="md">
           <Toolbar>
-            <Typography variant="h5" className={classes.logo} color="inherit">
-              <MdBook /> {title}
-            </Typography>
+            <Link
+              color="inherit"
+              className={classes.logo}
+              component={RouterLink}
+              to="/"
+            >
+              <Typography variant="h5" color="inherit">
+                <MdBook /> {title}
+              </Typography>
+            </Link>
             <Button>
               <Link
                 color="inherit"
