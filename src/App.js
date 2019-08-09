@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import Container from "@material-ui/core/Container";
+
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import About from "./components/pages/About";
@@ -13,25 +15,30 @@ function App() {
     <Router>
       <>
         <Navbar />
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <BookList books={"books"} onChange={"updateBooksDetails"} />
-            )}
-          />
+        <Container maxWidth="lg" className="container">
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <BookList books={"books"} onChange={"updateBooksDetails"} />
+              )}
+            />
 
-          <Route
-            exact
-            path="/pesquisar"
-            render={({ history }) => (
-              <SearchBooks onChange={"updateBooksDetails"} myBooks={"books"} />
-            )}
-          />
+            <Route
+              exact
+              path="/pesquisar"
+              render={({ history }) => (
+                <SearchBooks
+                  onChange={"updateBooksDetails"}
+                  myBooks={"books"}
+                />
+              )}
+            />
 
-          <Route exact path="/sobre" component={About} />
-        </Switch>
+            <Route exact path="/sobre" component={About} />
+          </Switch>
+        </Container>
         <SearchButton />
         <Footer />
       </>

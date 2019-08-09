@@ -1,5 +1,5 @@
 import React from "react";
-import { Link as RouterLink, withRouter } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 import { MdChevronLeft } from "react-icons/md";
 
