@@ -14,10 +14,7 @@ const About = ({ company }) => {
         Sobre este App
       </Typography>
       <Typography className={classes.text} variant="body1">
-        <strong>Phone List</strong> É Uma Aplicação alternativa ao google
-        Contacts. O gerenciador de contatos Phone List permite que os usuários
-        mantenham uma lista de contatos na web de forma segura e usando tudo de
-        mais moderno em tecnologia de desenvolvimento de aplicações.
+        <strong>MyReads</strong> É o primeiro projeto do Nanodegree React da Udacity. Faz parte da avaliação final do curso Fundamentos do React. Um aplicativo de estante de livros que permite ao usuário selecionar e categorizar livros conforme leu, está lendo no momento ou deseja ler.
       </Typography>
       <Typography className={classes.text} variant="body1">
         É concedida permissão, gratuitamente, a qualquer pessoa que obtenha uma
@@ -46,7 +43,7 @@ const About = ({ company }) => {
         MIT license
       </Typography>
       <Typography className={classes.text} variant="body1">
-        Versão: 1.0.0
+        Versão: 2.0.0
       </Typography>
       <Typography className={classes.text} variant="body1">
         Copyright {dayjs().year()} &copy;
