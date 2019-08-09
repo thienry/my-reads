@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types'
 import { FaHeart } from "react-icons/fa";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -7,12 +8,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 
-function MadeWithLove() {
+function MadeWithLove({ name }) {
   return (
     <Typography variant="body1" align="center" color="inherit">
       {"Feito com "} <FaHeart /> {"| Desenvolvido por"}
       <Link color="inherit" href="https://thiagotec.com/">
-        {" "}Thiago Moura
+        {" "} {name}
       </Link>
     </Typography>
   );
@@ -46,4 +47,13 @@ const useStyles = makeStyles(theme => ({
     color: "white"
   }
 }));
+
+MadeWithLove.propTypes = {
+  name: PropTypes.string,
+}
+
+MadeWithLove.defaultProps = {
+  name: "Thiago Moura"
+}
+
 export default Footer;
