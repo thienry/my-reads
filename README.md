@@ -1,68 +1,67 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Welcome to my own MyReads!
 
-## Available Scripts
+This is the first project of  Nanodegree React by  **Udacity**. Is a part of the final assessment for React Fundamentals course. A bookshelf app that allows user to select and categorize books as you have read, are currently reading, or want to read.
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Requirements
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- nodejs
+- npm
 
-### `npm test`
+Use [Create React App](https://github.com/facebookincubator/create-react-app) to bootstrap the project.
+This project is using [MDBReact](https://github.com/mdbootstrap/Admin-Dashboard-Template-React-Bootstrap).
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Run:
 
-### `npm run build`
+1.  [Download](https://github.com/thienry/myReads/archive/master.zip)  or  [Clone](https://github.com/thienry/myReads.git)  the Repository.
+2.  Run  `npm install`  to install the project dependencies.
+3.  Run the app using  `npm start`.
+4.  App can be seen at:  `localhost:3000`.
+The file explorer is accessible using the button in left corner of the navigation bar. You can create a new file by clicking the **New file** button in the file explorer. You can also create folders by clicking the **New folder** button.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Backend Server
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+To simplify your development process, we've provided a backend server for you to develop against. The provided file  [`BooksAPI.js`](https://github.com/udacity/reactnd-project-myreads-starter/blob/master/src/BooksAPI.js)  contains the methods you will need to perform necessary operations on the backend:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-   [`getAll`](https://github.com/udacity/reactnd-project-myreads-starter#getall)
+-   [`update`](https://github.com/udacity/reactnd-project-myreads-starter#update)
+-   [`search`](https://github.com/udacity/reactnd-project-myreads-starter#search)
 
-### `npm run eject`
+### [](https://github.com/udacity/reactnd-project-myreads-starter#getall)`getAll`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Method Signature:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+getAll()
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+-   Returns a Promise which resolves to a JSON object containing a collection of book objects.
+-   This collection represents the books currently in the bookshelves in your app.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### [](https://github.com/udacity/reactnd-project-myreads-starter#update)`update`
 
-## Learn More
+Method Signature:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+update(book, shelf)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+-   book:  `<Object>`  containing at minimum an  `id`  attribute
+-   shelf:  `<String>`  contains one of ["wantToRead", "currentlyReading", "read"]
+-   Returns a Promise which resolves to a JSON object containing the response data of the POST request
 
-### Code Splitting
+### [](https://github.com/udacity/reactnd-project-myreads-starter#search)`search`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Method Signature:
 
-### Analyzing the Bundle Size
+search(query)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+-   query:  `<String>`
+-   Returns a Promise which resolves to a JSON object containing a collection of a maximum of 20 book objects.
+-   These books do not know which shelf they are on. They are raw results only. You'll need to make sure that books have the correct state while on the search page.
 
-### Making a Progressive Web App
+# Important
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+If you had a problem with the bootstrap module, do it this step:
 
-### Advanced Configuration
+- Enter in the `index.js` file and drop the line 4 and type the code below:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+    import  'bootstrap-css-only/css/bootstrap.min.css';
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
