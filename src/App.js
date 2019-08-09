@@ -6,6 +6,7 @@ import Footer from "./components/layout/Footer";
 import About from "./components/pages/About";
 import BookList from "./components/books/BookList";
 import SearchBooks from "./components/search/SearchBooks";
+import SearchButton from "./components/layout/SearchButton";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
 
           <Route
             exact
-            path="search"
+            path="/pesquisar"
             render={({ history }) => (
               <SearchBooks onCChange={"updateBooksDetails"} myBooks={"books"} />
             )}
@@ -31,6 +32,7 @@ function App() {
 
           <Route exact path="/sobre" component={About} />
         </Switch>
+        <SearchButton />
         <Footer />
       </>
     </Router>
