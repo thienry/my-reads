@@ -26,7 +26,7 @@ function App() {
             exact
             path="/pesquisar"
             render={({ history }) => (
-              <SearchBooks onCChange={"updateBooksDetails"} myBooks={"books"} />
+              <SearchBooks onChange={"updateBooksDetails"} myBooks={"books"} />
             )}
           />
 
