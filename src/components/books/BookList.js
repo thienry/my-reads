@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const BookList = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <div />;
+};
 
-export default BookList
+export default BookList;

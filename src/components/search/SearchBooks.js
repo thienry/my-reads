@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import { MdChevronLeft } from "react-icons/md";
@@ -9,16 +8,14 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import GridList from "@material-ui/core/GridList";
 import Link from "@material-ui/core/Link";
-import Book from "../books/Book";
 
 const SearchBooks = () => {
   const classes = useStyles();
 
   return (
     <>
-      <div >
+      <div>
         <Paper className={classes.root}>
           <Link component={RouterLink} to="/" color="inherit">
             <Tooltip title="Voltar">
@@ -31,16 +28,13 @@ const SearchBooks = () => {
             className={classes.input}
             placeholder="Pesquise pelo Título ou Autor..."
             value=""
-            onChange={() => {}} 
+            onChange={() => {}}
           />
         </Paper>
-        
       </div>
     </>
   );
 };
-
-
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,25 +44,11 @@ const useStyles = makeStyles(theme => ({
     padding: "2px 4px",
     marginTop: "30px",
     marginLeft: "25%",
-    width: 683,
-    flexWrap: "wrap",
-    overflow: "hidden",
-    backgroundColor: theme.palette.background.paper
+    width: 683
   },
   input: {
     marginLeft: 8,
     flex: 1
-  },
-  gridList: {
-    flexWrap: "nowrap",
-    transform: "translateZ(0)"
-  },
-  title: {
-    color: theme.palette.primary.light
-  },
-  titleBar: {
-    background:
-      "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)"
   }
 }));
 
