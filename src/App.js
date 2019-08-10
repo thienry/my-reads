@@ -5,8 +5,8 @@ import Container from "@material-ui/core/Container";
 
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import Home from "./components/pages/Home";
 import About from "./components/pages/About";
-import BookList from "./components/books/BookList";
 import SearchBooks from "./components/search/SearchBooks";
 import SearchButton from "./components/layout/SearchButton";
 
@@ -17,14 +17,8 @@ function App() {
         <Navbar />
         <Container maxWidth="lg" className="container">
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => (
-                <BookList books={"books"} onChange={"updateBooksDetails"} />
-              )}
-            />
-
+            <Route exact path="/" component={Home} />
+            <Route exact path="/sobre" component={About} />
             <Route
               exact
               path="/pesquisar"
@@ -35,8 +29,6 @@ function App() {
                 />
               )}
             />
-
-            <Route exact path="/sobre" component={About} />
           </Switch>
         </Container>
         <SearchButton />
