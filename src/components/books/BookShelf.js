@@ -1,46 +1,41 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
+
+import BookShelfContext from "../../context/bookShelf/bookShelfContext";
 
 import Book from "./Book";
 
 import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 
-const BookShelf = ({ books, title, onChangeSelf }) => {
+
+const BookShelf = ({ title }) => {
   const classes = useStyles();
 
-  const updateBook = book => {
-    onChangeSelf(book);
-  };
+  const bookShelfContext = useContext(BookShelfContext);
+  const { books } = bookShelfContext;
 
   return (
     <>
       <Typography variant="h4" className={classes.title}>
         {title}
       </Typography>
-
+      <hr />
       <div>
-        <ul>
-          {books.map((book, index) => (
-            <Book
-              key={index}
-              book={book}
-              onUpdate={shelf => {
-                updateBook(book);
-              }}
-            />
+        <Grid container spacing={4}>
+          {books.map(book => (
+            <Book key={book.id} book={book} />
           ))}
-          <hr />
-        </ul>
+        </Grid>
       </div>
     </>
   );
 };
 
 BookShelf.propTypes = {
-  books: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
-  onChangeShelf: PropTypes.func.isRequired
+  books: PropTypes.array.isRequired
 };
 
 const useStyles = makeStyles({

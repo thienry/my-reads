@@ -28,15 +28,16 @@ const BookShelfState = props => {
     setLoading();
     const res = await axios.get(`${base_api_url}/books`, config);
 
-    dispatch({ type: GET_BOOKS, payload: res.data });
+    dispatch({ type: GET_BOOKS, payload: res.data.books });
   };
 
   // getBook
   const getBook = async id => {
     setLoading();
     const res = await axios.get(`${base_api_url}/books/${id}`, config);
+    console.log(res)
 
-    dispatch({ type: GET_BOOK, payload: res.data });
+    dispatch({ type: GET_BOOK, payload: res.data.book });
   };
 
   // updateBook
