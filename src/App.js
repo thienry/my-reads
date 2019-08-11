@@ -7,10 +7,10 @@ import Container from "@material-ui/core/Container";
 
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import SearchButton from "./components/layout/SearchButton";
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
-import SearchBooks from "./components/search/SearchBooks";
-import SearchButton from "./components/layout/SearchButton";
+import Search from "./components/pages/Search";
 
 function App() {
   return (
@@ -22,16 +22,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/sobre" component={About} />
-              <Route
-                exact
-                path="/pesquisar"
-                render={({ history }) => (
-                  <SearchBooks
-                    onChange={"updateBooksDetails"}
-                    myBooks={"books"}
-                  />
-                )}
-              />
+              <Route exact path="/pesquisar" component={Search} history />
             </Switch>
           </Container>
           <SearchButton />
