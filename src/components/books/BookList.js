@@ -4,11 +4,10 @@ import PropTypes from "prop-types";
 import BookShelfContext from "../../context/bookShelf/bookShelfContext";
 
 import BookShelf from "./BookShelf";
-import Spinner from "../layout/Spinner";
 
 const BookList = ({ onChange }) => {
   const bookShelfContext = useContext(BookShelfContext);
-  const { books, getBooks, loading } = bookShelfContext;
+  const { books, getBooks } = bookShelfContext;
 
   useEffect(() => {
     getBooks();
@@ -16,26 +15,22 @@ const BookList = ({ onChange }) => {
     //eslint-disable-next-line
   }, []);
 
-  if (loading) {
-    return <Spinner />;
-  } else {
-    return (
-      <div>
-        <BookShelf
-          books={books.filter(book => book.shelf === "currentlyReading")}
-          title="Lendo Atualmente"
-        />
-        <BookShelf
-          books={books.filter(book => book.shelf === "read")}
-          title="Já Leu"
-        />
-        <BookShelf
-          books={books.filter(book => book.shelf === "wantToRead")}
-          title="Quer Ler"
-        />
-      </div>
-    );
-  }
+  const currentlyReading = books.filter(
+    book => book.shelf === "currentlyReading"
+  );
+  const read = books.filter(book => book.shelf === "read");
+  const wantToRead = books.filter(book => book.shelf === "wantToRead");
+
+  return (
+    <div>
+      {currentlyReading && (
+        <BookShelf books={currentlyReading} title="Lendo Atualmente" />
+      )}
+
+      {read && <BookShelf books={read} title="Já Leu" />}
+      {wantToRead && <BookShelf books={wantToRead} title="Quer Ler" />}
+    </div>
+  );
 };
 
 BookList.propTypes = {

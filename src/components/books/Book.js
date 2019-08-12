@@ -98,7 +98,8 @@ Book.propTypes = {
 
 const useStyles = makeStyles({
   root: {
-    margin: "20px auto"
+    margin: "20px auto",
+    flex: 1
   },
   card: {
     marginLeft: 20,
