@@ -4,7 +4,6 @@ import {
   UPDATE_BOOK,
   SEARCH_BOOKS,
   SET_LOADING,
-  CLEAR_SEARCH
 } from "../types";
 
 export default (state, action) => {
@@ -35,15 +34,9 @@ export default (state, action) => {
     case SEARCH_BOOKS:
       return {
         ...state,
-        query: action.payload,
+        books: action.payload,
         loading: false
       };
-
-    case CLEAR_SEARCH:
-      return {
-        ...state,
-        query: ""
-      }
 
     case SET_LOADING:
       return {

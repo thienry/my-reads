@@ -4,7 +4,8 @@ import { Link as RouterLink } from "react-router-dom";
 import BookShelfContext from "../../context/bookShelf/bookShelfContext";
 
 import Book from "../books/Book";
-import empty from "./empty.png";
+import Spinner from "../layout/Spinner";
+//import empty from "./empty.png";
 
 import { MdSearch, MdChevronLeft } from "react-icons/md";
 
@@ -15,16 +16,15 @@ import { Container } from "@material-ui/core";
 import Tooltip from "@material-ui/core/Tooltip";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
 const SearchBooks = () => {
   const classes = useStyles();
+  const [query, setQuery] = useState("");
+
   const bookShelfContext = useContext(BookShelfContext);
 
-  const { books } = bookShelfContext;
-
-  const { searchBooks } = bookShelfContext;
-
-  const [query, setQuery] = useState("");
+  const { books, searchBooks, loading } = bookShelfContext;
 
   const onChange = e => {
     setQuery(e.target.value);
@@ -32,6 +32,8 @@ const SearchBooks = () => {
 
   const onSubmit = e => {
     e.preventDefault();
+
+    setQuery(query);
     searchBooks(query);
     setQuery("");
   };
@@ -64,20 +66,17 @@ const SearchBooks = () => {
         </form>
       </Container>
 
-      <img
-        src={empty}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        alt="Empty"
-      />
-
-      <Grid container spacing={4}>
-        {query.length > 0 &&
-          books.map(book => <Book key={book.id} book={book} />)}
-      </Grid>
+      {books.length !== 0 && !loading ? (
+        <Grid container spacing={4}>
+          {books.map(book => (
+            <Book key={book.id} book={book} />
+          ))}
+        </Grid>
+      ) : (
+        <Typography variant="h4" style={{ marginTop: 100, textAlign: "center" }}>
+          Pesquise para visualizar os livros!!!
+        </Typography>
+      )}
     </>
   );
 };

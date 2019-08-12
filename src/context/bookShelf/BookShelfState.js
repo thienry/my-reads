@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import axios from "axios";
-import { config, base_api_url } from "../../util/config";
+import { config, configType, base_api_url } from "../../util/config";
 
 import BookShelfContext from "./bookShelfContext";
 import BookShelfReducer from "./bookShelfReducer";
@@ -9,8 +9,7 @@ import {
   GET_BOOK,
   UPDATE_BOOK,
   SEARCH_BOOKS,
-  CLEAR_SEARCH,
-  SET_LOADING,
+  SET_LOADING
 } from "../types";
 
 const BookShelfState = props => {
@@ -40,29 +39,28 @@ const BookShelfState = props => {
 
   // updateBook
   const updateBook = async book => {
-    const res = await axios.put(`${base_api_url}/book/${book.id}`, book, {
-      body: JSON.stringify(book.shelf),
-      config
-    });
+    const res = await axios.put(
+      `${base_api_url}/books/${book.id}`,
+      { shelf: book.shelf },
+      configType
+    );
 
     dispatch({ type: UPDATE_BOOK, payload: res.json });
   };
 
   // searchBooks
-  const searchBooks = async query => {
+  const searchBooks = async search => {
     setLoading();
-    const res = await axios.post(`${base_api_url}/search`, {
-      config,
-      "Content-Type": "application/json",
-      body: JSON.stringify({ query })
-    });
 
-    dispatch({ type: SEARCH_BOOKS, payload: res.json });
+    const res = await axios.post(
+      `${base_api_url}/search`,
+      { query: search },
+      configType
+    );
+
+    dispatch({ type: SEARCH_BOOKS, payload: res.data.books });
   };
 
-  // clearSearch
-  const clearSearch = query => dispatch({ type: CLEAR_SEARCH })
- 
   // Set Loading
   const setLoading = () => dispatch({ type: SET_LOADING });
 
@@ -75,7 +73,6 @@ const BookShelfState = props => {
         getBook,
         updateBook,
         searchBooks,
-        clearSearch,
         setLoading
       }}
     >
