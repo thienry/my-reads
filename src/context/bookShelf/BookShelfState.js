@@ -17,7 +17,6 @@ const BookShelfState = props => {
   const initialState = {
     books: [],
     book: {},
-    query: "",
     loading: false
   };
 
@@ -35,7 +34,6 @@ const BookShelfState = props => {
   const getBook = async id => {
     setLoading();
     const res = await axios.get(`${base_api_url}/books/${id}`, config);
-    console.log(res)
 
     dispatch({ type: GET_BOOK, payload: res.data.book });
   };
@@ -73,7 +71,6 @@ const BookShelfState = props => {
       value={{
         books: state.books,
         book: state.book,
-        query: state.query,
         getBooks,
         getBook,
         updateBook,
