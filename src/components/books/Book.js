@@ -93,7 +93,7 @@ const Book = ({ book }) => {
 };
 
 Book.propTypes = {
-  book: PropTypes.object
+  book: PropTypes.object.isRequired
 };
 
 const useStyles = makeStyles({

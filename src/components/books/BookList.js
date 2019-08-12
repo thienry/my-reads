@@ -1,11 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import PropTypes from "prop-types";
 
 import BookShelfContext from "../../context/bookShelf/bookShelfContext";
 
 import BookShelf from "./BookShelf";
 
-const BookList = ({ onChange }) => {
+const BookList = () => {
   const bookShelfContext = useContext(BookShelfContext);
   const { books, getBooks } = bookShelfContext;
 
@@ -31,10 +30,6 @@ const BookList = ({ onChange }) => {
       {wantToRead && <BookShelf books={wantToRead} title="Quer Ler" />}
     </div>
   );
-};
-
-BookList.propTypes = {
-  onChange: PropTypes.func.isRequired
 };
 
 export default BookList;
