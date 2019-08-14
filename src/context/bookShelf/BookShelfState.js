@@ -16,6 +16,7 @@ const BookShelfState = props => {
   const initialState = {
     books: [],
     book: {},
+    image: "",
     loading: false
   };
 

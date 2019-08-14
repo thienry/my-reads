@@ -3,7 +3,7 @@ import {
   GET_BOOK,
   UPDATE_BOOK,
   SEARCH_BOOKS,
-  SET_LOADING
+  SET_LOADING,
 } from "../types";
 
 export default (state, action) => {

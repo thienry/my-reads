@@ -1,12 +1,11 @@
 import React, { useContext, useEffect } from "react";
 //import { Link } from "react-router-dom";
 import dayjs from "dayjs";
-import "dayjs/locale/pt-br";
 
 import BookShelfContext from "../../context/bookShelf/bookShelfContext";
 import Spinner from "../layout/Spinner";
 
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -19,7 +18,6 @@ const Book = ({ match }) => {
   const { loading, book, getBook } = bookShelfContext;
 
   const classes = useStyles();
-  const theme = useTheme();
   const isActive = useMediaQuery("(max-width: 500px)");
 
   useEffect(() => {
@@ -38,6 +36,8 @@ const Book = ({ match }) => {
     previewLink,
     shelf
   } = book;
+  
+  const img = { ...imageLinks };
 
   const shelfState = () => {
     if (shelf === "currentlyReading") {
@@ -62,7 +62,7 @@ const Book = ({ match }) => {
           <Grid container>
             <img
               className={classes.coverMediaQuery}
-              src="http://books.google.com/books/content?id=sJf1vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+              src={img.thumbnail}
               alt={title}
             />
             <div className={classes.typography}>
@@ -110,11 +110,7 @@ const Book = ({ match }) => {
         </Paper>
       ) : (
         <Paper className={classes.root}>
-          <img
-            className={classes.cover}
-            src="http://books.google.com/books/content?id=sJf1vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-            alt={title}
-          />
+          <img className={classes.cover} src={img.thumbnail} alt={title} />
           <div className={classes.typography}>
             <Typography component="h4" variant="h4">
               {title}
@@ -160,6 +156,9 @@ const Book = ({ match }) => {
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItens: "center",
     padding: theme.spacing(1, 2),
     margin: theme.spacing(5)
   },
@@ -172,9 +171,10 @@ const useStyles = makeStyles(theme => ({
     height: 180
   },
   coverMediaQuery: {
-    paddingLeft: 90,
+    display: "flex",
     padding: theme.spacing(1),
-    height: 180
+    height: 180,
+    marginLeft: "26%"
   },
   typography: {
     padding: theme.spacing(1)
