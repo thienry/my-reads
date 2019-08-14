@@ -3,7 +3,7 @@ import {
   GET_BOOK,
   UPDATE_BOOK,
   SEARCH_BOOKS,
-  SET_LOADING,
+  SET_LOADING
 } from "../types";
 
 export default (state, action) => {
@@ -26,7 +26,7 @@ export default (state, action) => {
       return {
         ...state,
         books: state.books.map(book =>
-          book.id === action.payload.id ? action.payload : book
+          book.shelf === action.payload.shelf ? action.payload : book
         ),
         loading: false
       };

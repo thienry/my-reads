@@ -1,128 +1,195 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useContext, useEffect } from "react";
+//import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
 
-import { MdArrowDropDown } from "react-icons/md";
+import BookShelfContext from "../../context/bookShelf/bookShelfContext";
+import Spinner from "../layout/Spinner";
 
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useMediaQuery } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 
-const Book = ({ book }) => {
+const Book = ({ match }) => {
+  const bookShelfContext = useContext(BookShelfContext);
+  const { loading, book, getBook } = bookShelfContext;
+
   const classes = useStyles();
-  const ITEM_HEIGHT = 48;
+  const theme = useTheme();
+  const isActive = useMediaQuery("(max-width: 500px)");
 
-  const [anchorEl, setAnchorEl] = useState(null);
+  useEffect(() => {
+    getBook(match.params.id);
 
-  const open = Boolean(anchorEl);
+    //eslint-disable-next-line
+  }, []);
 
-  function handleClick(e) {
-    setAnchorEl(e.currentTarget);
-  }
+  const {
+    title,
+    authors,
+    publishedDate,
+    description,
+    imageLinks,
+    pageCount,
+    previewLink,
+    shelf
+  } = book;
 
-  function handleClose() {
-    setAnchorEl(null);
-  }
+  const shelfState = () => {
+    if (shelf === "currentlyReading") {
+      return <span>Lendo Atualmente</span>;
+    } else if (shelf === "read") {
+      return <span>Já Leu</span>;
+    } else if (shelf === "wantToRead") {
+      return <span>Quer Ler</span>;
+    } else {
+      return <span>Fora da Estante</span>;
+    }
+  };
+
+  const selfShelf = shelfState();
+
+  if (loading) return <Spinner />;
 
   return (
-    <Grid item xs={6} sm={4} md={2} className={classes.root}>
-      <Card className={classes.card}>
-        <CardMedia
-          component="img"
-          className={classes.bookCover}
-          image={book.imageLinks.thumbnail}
-          alt={book.title}
-          title={book.title}
-        />
-      </Card>
-      <IconButton
-        aria-label="more"
-        aria-controls="long-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-        className={classes.icon}
-      >
-        <MdArrowDropDown />
-      </IconButton>
+    <>
+      {isActive ? (
+        <Paper className={classes.rootMediaQuery}>
+          <Grid container>
+            <img
+              className={classes.coverMediaQuery}
+              src="http://books.google.com/books/content?id=sJf1vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+              alt={title}
+            />
+            <div className={classes.typography}>
+              <Typography
+                className={classes.typographyMediaQuery}
+                component="h4"
+                variant="h4"
+              >
+                {title}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Autor(es):</strong> {authors}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Lançamento:</strong>{" "}
+                {dayjs(publishedDate).format("YYYY")}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Número de Páginas:</strong> {pageCount}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                <strong>Estante:</strong> {selfShelf}
+              </Typography>
 
-      <Menu
-        value={book.shelf}
-        id="long-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: 200
-          }
-        }}
-      >
-        <MenuItem value="none" disabled>
-          Mudar para...
-        </MenuItem>
-        <MenuItem value="currentlyReading">Lendo Atualmente</MenuItem>
-        <MenuItem value="read">Já Leu</MenuItem>
-        <MenuItem value="wantToRead">Quer Ler</MenuItem>
-      </Menu>
-      <Typography className={classes.textTitle} gutterBottom variant="body1">
-        {book.title}
-      </Typography>
-      <Typography className={classes.text} variant="subtitle2">
-        {book.authors}
-      </Typography>
-      <Button className={classes.link} variant="contained" color="primary">
-        <Link
-          underline="none"
-          color="inherit"
-          component="a"
-          href={book.previewLink}
-        >
-          Preview
-        </Link>
-      </Button>
-    </Grid>
+              <Typography variant="body1" className={classes.description}>
+                <strong>Descrição do Livro:</strong> {description}
+              </Typography>
+
+              <Button
+                className={classes.link}
+                variant="contained"
+                color="primary"
+              >
+                <Link
+                  underline="none"
+                  color="inherit"
+                  component="a"
+                  href={previewLink}
+                >
+                  Preview
+                </Link>
+              </Button>
+            </div>
+          </Grid>
+        </Paper>
+      ) : (
+        <Paper className={classes.root}>
+          <img
+            className={classes.cover}
+            src="http://books.google.com/books/content?id=sJf1vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+            alt={title}
+          />
+          <div className={classes.typography}>
+            <Typography component="h4" variant="h4">
+              {title}
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              <strong>Autor(es):</strong> {authors}
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              <strong>Lançamento:</strong> {dayjs(publishedDate).format("YYYY")}
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              <strong>Número de Páginas:</strong> {pageCount}
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              <strong>Estante:</strong> {selfShelf}
+            </Typography>
+
+            <Typography variant="body1" className={classes.description}>
+              <strong>Descrição do Livro:</strong> {description}
+            </Typography>
+
+            <Button
+              className={classes.link}
+              variant="contained"
+              color="primary"
+            >
+              <Link
+                underline="none"
+                color="inherit"
+                component="a"
+                href={previewLink}
+              >
+                Preview
+              </Link>
+            </Button>
+          </div>
+        </Paper>
+      )}
+    </>
   );
 };
 
-Book.propTypes = {
-  book: PropTypes.object.isRequired
-};
-
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
-    margin: "20px auto",
-    flex: 1
+    display: "flex",
+    padding: theme.spacing(1, 2),
+    margin: theme.spacing(5)
   },
-  card: {
-    marginLeft: 20,
-    maxWidth: 128
+  rootMediaQuery: {
+    display: "flex",
+    paddingLeft: theme.spacing(),
+    margin: theme.spacing(1)
   },
-  bookCover: {
-    width: 128,
+  cover: {
     height: 180
   },
-  text: {
-    marginLeft: 20
+  coverMediaQuery: {
+    paddingLeft: 90,
+    padding: theme.spacing(1),
+    height: 180
   },
-  textTitle: {
-    paddingTop: 15,
-    marginLeft: 20
+  typography: {
+    padding: theme.spacing(1)
+  },
+  typographyMediaQuery: {
+    padding: theme.spacing(1, 2),
+    textAlign: "center"
   },
   link: {
-    width: "100%"
+    width: "100%",
+    marginTop: theme.spacing(1)
   },
-  icon: {
-    position: "relative",
-    float: "right",
+  description: {
+    textAlign: "justify"
   }
-});
+}));
 
 export default Book;

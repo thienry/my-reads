@@ -11,6 +11,7 @@ import SearchButton from "./components/layout/SearchButton";
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 import Search from "./components/pages/Search";
+import Book from "./components/books/Book";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Container maxWidth="lg" className="container">
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/books/:id" component={Book} />
               <Route exact path="/sobre" component={About} />
               <Route exact path="/pesquisar" component={Search} history />
             </Switch>

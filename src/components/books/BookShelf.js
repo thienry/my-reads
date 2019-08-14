@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
-import Book from "./Book";
+import BookItem from "./BookItem";
 import Spinner from "../layout/Spinner";
 
 import BookShelfContext from "../../context/bookShelf/bookShelfContext";
@@ -26,7 +26,7 @@ const BookShelf = ({ books, title }) => {
         <div>
           <Grid container spacing={4}>
             {books.map(book => (
-              <Book key={book.id} book={book} />
+              <BookItem key={book.id} book={book} />
             ))}
           </Grid>
         </div>

@@ -3,8 +3,8 @@ import { Link as RouterLink } from "react-router-dom";
 
 import BookShelfContext from "../../context/bookShelf/bookShelfContext";
 
-import Book from "../books/Book";
-import Spinner from "../layout/Spinner";
+import BookItem from "../books/BookItem";
+//import Spinner from "../layout/Spinner";
 //import empty from "./empty.png";
 
 import { MdSearch, MdChevronLeft } from "react-icons/md";
@@ -69,11 +69,14 @@ const SearchBooks = () => {
       {books.length !== 0 && !loading ? (
         <Grid container spacing={4}>
           {books.map(book => (
-            <Book key={book.id} book={book} />
+            <BookItem key={book.id} book={book} />
           ))}
         </Grid>
       ) : (
-        <Typography variant="h4" style={{ marginTop: 100, textAlign: "center" }}>
+        <Typography
+          variant="h4"
+          style={{ marginTop: 100, textAlign: "center" }}
+        >
           Pesquise para visualizar os livros!!!
         </Typography>
       )}
