@@ -39,12 +39,10 @@ const BookShelfState = props => {
   };
 
   // updateBook
-  const updateBook = async book => {
-    console.log(book);
-
+  const updateBook = async (book, shelf) => {
     const res = await axios.put(
       `${base_api_url}/books/${book.id}`,
-      { shelf: book.shelf },
+      { shelf: shelf },
       configType
     );
 

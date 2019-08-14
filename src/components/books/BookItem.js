@@ -22,8 +22,12 @@ const BookItem = ({ book }) => {
 
   const classes = useStyles();
 
-  const onChange = () => {
-    updateBook(book);
+  const img = { ...book }
+
+  const onChange = (e) => {
+    const val = e.target.value
+
+    updateBook(book, val);
   };
 
   return (
@@ -33,7 +37,7 @@ const BookItem = ({ book }) => {
           <CardMedia
             component="img"
             className={classes.bookCover}
-            image={book.imageLinks.thumbnail}
+            image={img.imageLinks.thumbnail}
             alt={book.title}
             title={book.title}
           />
@@ -42,7 +46,7 @@ const BookItem = ({ book }) => {
       <Typography className={classes.textTitle} gutterBottom variant="body1">
         {book.title}
       </Typography>
-      <form autoComplete="off">
+      <form className={classes.form} autoComplete="off">
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="shelf">Estante...</InputLabel>
           <Select
@@ -104,6 +108,9 @@ const useStyles = makeStyles({
   icon: {
     position: "relative",
     float: "right"
+  },
+  form: {
+    marginLeft: 20
   }
 });
 
