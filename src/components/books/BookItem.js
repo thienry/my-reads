@@ -26,8 +26,8 @@ const BookItem = ({ book }) => {
 
   const onChange = (e) => {
     const val = e.target.value
-
     updateBook(book, val);
+  
   };
 
   return (
@@ -88,7 +88,7 @@ const useStyles = makeStyles({
     flexWrap: "wrap"
   },
   card: {
-    marginLeft: 20,
+    marginLeft: 10,
     maxWidth: 128
   },
   bookCover: {
@@ -96,21 +96,22 @@ const useStyles = makeStyles({
     height: 180
   },
   text: {
-    marginLeft: 20
+    marginLeft: 10
   },
   textTitle: {
     paddingTop: 15,
-    marginLeft: 20
+    marginLeft: 10
   },
   link: {
-    width: "100%"
+    width: "100%",
+    marginTop: 5
   },
   icon: {
     position: "relative",
     float: "right"
   },
   form: {
-    marginLeft: 20
+    marginLeft: 10
   }
 });
 

@@ -26,7 +26,7 @@ export default (state, action) => {
       return {
         ...state,
         books: state.books.map(book =>
-          book.shelf === action.payload.shelf ? action.payload : book
+          book.id === action.payload.id ? action.payload : book
         ),
         loading: false
       };

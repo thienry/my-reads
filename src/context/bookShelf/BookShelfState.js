@@ -46,9 +46,11 @@ const BookShelfState = props => {
       configType
     );
 
-    console.log(res.data);
+    const resp = await axios.get(`${base_api_url}/books`, config);
 
+    
     dispatch({ type: UPDATE_BOOK, payload: res.data });
+    dispatch({ type: GET_BOOKS, payload: resp.data.books });
   };
 
   // searchBooks
