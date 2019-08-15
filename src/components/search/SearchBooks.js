@@ -12,7 +12,7 @@ import { MdSearch, MdChevronLeft } from "react-icons/md";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
-import { Container } from "@material-ui/core";
+import { Container, useMediaQuery } from "@material-ui/core";
 import Tooltip from "@material-ui/core/Tooltip";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
@@ -20,6 +20,8 @@ import Typography from "@material-ui/core/Typography";
 
 const SearchBooks = () => {
   const classes = useStyles();
+  const isActive = useMediaQuery("(max-width: 500px)");
+
   const [query, setQuery] = useState("");
 
   const bookShelfContext = useContext(BookShelfContext);
@@ -49,15 +51,27 @@ const SearchBooks = () => {
               </IconButton>
             </Tooltip>
           </Link>
-          <TextField
-            id="standard-search"
-            label="Pesquise Título ou Autor"
-            type="search"
-            className={classes.textField}
-            margin="normal"
-            onChange={onChange}
-            value={query}
-          />
+          {isActive ? (
+            <TextField
+              id="standard-search"
+              label="Pesquise Título ou Autor"
+              type="search"
+              className={classes.textFieldMediaQuery}
+              margin="normal"
+              onChange={onChange}
+              value={query}
+            />
+          ) : (
+            <TextField
+              id="standard-search"
+              label="Pesquise Título ou Autor"
+              type="search"
+              className={classes.textField}
+              margin="normal"
+              onChange={onChange}
+              value={query}
+            />
+          )}
           <Tooltip title="Pesquisar" placement="top">
             <IconButton type="submit" className={classes.button}>
               <MdSearch />
@@ -97,6 +111,9 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     marginTop: 25
+  },
+  textFieldMediaQuery: {
+    width: 200
   }
 }));
 
